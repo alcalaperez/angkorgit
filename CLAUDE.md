@@ -3102,7 +3102,10 @@ update CLAUDE.md or docs/ — never the code.
   after `unlisten()`. The convention now: capture a module-level sequence token
   (`++seq`) before the await and bail if it moved or `get().repo?.path !== path`
   after; repository/store.ts (openSeq/fullSeq/statusSeq — statusSeq is shared between
-  refresh and refreshStatus so an older full refresh can't clobber a newer status),
+  refresh and refreshStatus so an older full refresh can't clobber a newer status;
+  open() re-checks openSeq before its deferred `import().then(addRepoTab)`, or a
+  ⌘W right after a tab switch closed the tab and the late add put it back — the
+  tab e2e failed ~1 in 5 runs on main before the guard),
   graph/store.ts (requestSeq + `get().layout !== layout` before mutating the shared
   GraphLayout), DiffPanel (requestSeq ref), and RepositoryPage's watcher handler
   (`stillCurrent()` after every await + trailing `pending` re-run instead of dropping
