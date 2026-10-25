@@ -6,6 +6,13 @@ All notable changes to AngKorGit are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+- **Write an earlier commit's message with AI.** The commit message editor in the
+  inspector has the same sparkle button as the commit box: it sends that commit's
+  changes to your AI provider and fills in a new summary and description, following
+  your commit style and branch prefix rules. Edit it, then Save message as before;
+  the button stops a run that is taking too long.
+
 ### Changed
 - **Submodules follow the commit your repository records.** A pull, checkout,
   merge, rebase, cherry-pick, revert, hard reset or stash pop that moves a
