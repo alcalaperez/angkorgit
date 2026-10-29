@@ -13,6 +13,35 @@ All notable changes to AngKorGit are documented here. The format follows
   your commit style and branch prefix rules. Edit it, then Save message as before;
   the button stops a run that is taking too long.
 
+### Fixed
+- **The AI message editor keeps the keyboard while generating.** Clicking the
+  sparkle now moves focus into the summary, so Esc and ⌘⏎ keep working in
+  WebKit-based views (where a clicked button never takes focus), and the summary
+  and description are locked with readOnly instead of disabled, so they no longer
+  dim or lose the editor's ring while the AI runs.
+- Closing a tab right after switching to it (⌘W / Ctrl+W) no longer brings the
+  closed tab back a moment later.
+
+## [0.25.0] — 2026-10-28
+
+The know-before-you-pull release. Pull now tells you ahead of time when it would
+conflict or stop at your uncommitted edits, submodules move with the commit the
+repository records instead of showing up as a stray change, and scripts without an
+extension are highlighted from their shebang.
+
+### Added
+- **Scripts without an extension get syntax highlighting from their shebang.** A file
+  named `deploy` or `migrate` whose first line is `#!/usr/bin/env bash`, `python3`,
+  `node`, `deno`, `bun`, `ruby`, `php`, `swift` or `ts-node` is highlighted as that
+  language in diffs and blame. The name and extension still win when they say
+  something. (#81)
+- **Pull tells you before it goes wrong.** After a fetch, AngKorGit tries the
+  pull in memory. When it would conflict, the Pull button carries a warning, its
+  tooltip names the files, and clicking it says what will happen before anything
+  moves. When uncommitted edits would stop the pull, it names those files and
+  offers to stash just them. It follows `pull.rebase`, so a rebase that would stop
+  on one of your commits is caught too.
+
 ### Changed
 - **Submodules follow the commit your repository records.** A pull, checkout,
   merge, rebase, cherry-pick, revert, hard reset or stash pop that moves a
@@ -23,18 +52,11 @@ All notable changes to AngKorGit are documented here. The format follows
   uncommitted change, and committing everything would have undone the update.
 
 ### Fixed
-- **The AI message editor keeps the keyboard while generating.** Clicking the
-  sparkle now moves focus into the summary, so Esc and ⌘⏎ keep working in
-  WebKit-based views (where a clicked button never takes focus), and the summary
-  and description are locked with readOnly instead of disabled, so they no longer
-  dim or lose the editor's ring while the AI runs.
 - A submodule checked out at a different commit than the repository records (after
   a pull in the terminal, say) gets an **Update submodule** button on its row and in
   its menu, and its tooltip names both commits. Discard on that row checks out the
   recorded commit instead of failing with "Submodule changes must be discarded
   inside the submodule repository".
-- Closing a tab right after switching to it (⌘W / Ctrl+W) no longer brings the
-  closed tab back a moment later.
 - **A repository tab stopped updating when files changed.** Switching tabs while
   the previous repository was still setting up its file watcher (slow for a repo
   with a large `node_modules`) could leave the new tab watching the old folder, or
@@ -1815,7 +1837,8 @@ The first release. 🏛️
 - AI assistant with pluggable providers (OpenAI, Anthropic, Gemini, Ollama,
   LM Studio): commit messages, diff/conflict explanations, PR descriptions, reviews
 
-[Unreleased]: https://github.com/cheat2001/angkorgit/compare/v0.24.0...HEAD
+[Unreleased]: https://github.com/cheat2001/angkorgit/compare/v0.25.0...HEAD
+[0.25.0]: https://github.com/cheat2001/angkorgit/compare/v0.24.0...v0.25.0
 [0.24.0]: https://github.com/cheat2001/angkorgit/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/cheat2001/angkorgit/compare/v0.22.0...v0.23.0
 [0.22.0]: https://github.com/cheat2001/angkorgit/compare/v0.21.1...v0.22.0
