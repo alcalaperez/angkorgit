@@ -23,6 +23,11 @@ All notable changes to AngKorGit are documented here. The format follows
   uncommitted change, and committing everything would have undone the update.
 
 ### Fixed
+- **The AI message editor keeps the keyboard while generating.** Clicking the
+  sparkle now moves focus into the summary, so Esc and ⌘⏎ keep working in
+  WebKit-based views (where a clicked button never takes focus), and the summary
+  and description are locked with readOnly instead of disabled, so they no longer
+  dim or lose the editor's ring while the AI runs.
 - A submodule checked out at a different commit than the repository records (after
   a pull in the terminal, say) gets an **Update submodule** button on its row and in
   its menu, and its tooltip names both commits. Discard on that row checks out the

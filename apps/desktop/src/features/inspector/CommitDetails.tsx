@@ -395,6 +395,7 @@ export function CommitDetails({
     }
   };
   const generateDraftMessage = async () => {
+    draftSummaryRef.current?.focus();
     if (messageAiBusy) {
       stopMessageAi();
       return;
@@ -728,7 +729,7 @@ export function CommitDetails({
                 rows={1}
                 autoCapitalize="off"
                 spellCheck
-                disabled={messageAiBusy}
+                readOnly={messageAiBusy}
                 className="min-h-9 resize-none overflow-hidden rounded-none border-0 bg-transparent py-2 pl-3 pr-9 text-sm font-medium leading-snug text-foreground shadow-none placeholder:font-normal placeholder:text-faint focus-visible:border-0 focus-visible:ring-0"
               />
               <Hint label={messageAiBusy ? 'Stop generating' : 'Generate message with AI'}>
@@ -761,7 +762,7 @@ export function CommitDetails({
               }}
               placeholder="Description"
               aria-label="Commit description"
-              disabled={messageAiBusy}
+              readOnly={messageAiBusy}
               autoCapitalize="off"
               spellCheck
               rows={Math.min(12, Math.max(3, draftParts.body.split('\n').length + 1))}
